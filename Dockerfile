@@ -7,7 +7,7 @@ ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
 RUN pip install --upgrade pip
-RUN pip install --no-cache-dir djangorestframework psycopg2 python-dotenv
+RUN pip install --no-cache-dir djangorestframework psycopg2-binary python-dotenv
 
 
 # Runtime Stage
