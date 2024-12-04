@@ -15,14 +15,14 @@ services:
     networks:
       - app_network
 
-  db:
-    image: postgres:14.15-alpine3.20
-    volumes:
-      - postgres_data:/var/lib/postgresql/data/
-    environment:
-      - POSTGRES_USER=clcrud
-      - POSTGRES_PASSWORD=clcrud
-      - POSTGRES_DB=clcrud
+  # db:
+  #   image: postgres:14.15-alpine3.20
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data/
+  #   environment:
+  #     - POSTGRES_USER=clcrud
+  #     - POSTGRES_PASSWORD=clcrud
+  #     - POSTGRES_DB=clcrud
 
 volumes:
   postgres_data:
