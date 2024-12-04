@@ -9,7 +9,13 @@ services:
       - POSTGRES_USER=clcrud
       - POSTGRES_PASSWORD=clcrud
       - POSTGRES_DB=clcrud
-  
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "clcrud"]
+      interval: 10s
+      retries: 5
+      start_period: 10s
+      timeout: 5s
+
   web:
     build:
       context: .
@@ -20,12 +26,12 @@ services:
     ports:
       - 5000:5000
     env_file:
-      - ./.env.dev
+      - ./.env
     networks:
       - app_network
     depends_on:
       - db
-      
+
 volumes:
   postgres_data:
 
