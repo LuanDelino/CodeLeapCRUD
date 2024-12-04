@@ -50,12 +50,15 @@ services:
     depends_on:
       - db
       
-  # nginx:
-  #   build: ./nginx
-  #   ports:
-  #     - 1337:80
-  #   depends_on:
-  #     - web
+  nginx:
+    build:
+      context: ./nginx
+    ports:
+      - "1337:80"
+    depends_on:
+      - web
+    networks:
+      - app_network
 
 volumes:
   postgres_data:
