@@ -42,9 +42,12 @@ services:
       bash -c "
         sleep 10 && 
         python manage.py makemigrations && 
-        python manage.py migrate && python manage.py runserver 0.0.0.0:5000"
+        python manage.py migrate && 
+         gunicorn app.wsgi:application --bind 0.0.0.0:5000"
     volumes:
       - ./app/:/usr/src/app/
+    expose:
+      - 5000
     ports:
       - 5000:5000
     env_file:
@@ -53,6 +56,15 @@ services:
       - app_network
     depends_on:
       - db
+      
+  nginx:
+    build: ./nginx
+    volumes:
+      - static_volume:/home/app/web/staticfiles
+    ports:
+      - 1337:80
+    depends_on:
+      - web
 
 volumes:
   postgres_data:
