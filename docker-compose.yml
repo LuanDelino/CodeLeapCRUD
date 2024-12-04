@@ -39,7 +39,11 @@ services:
       context: .
       dockerfile: Dockerfile
     command: >
-      bash -c "sleep 10 && python manage.py migrate && python manage.py runserver 0.0.0.0:5000"
+      bash -c "
+        sleep 10 && 
+        python manage.py makemigrations && 
+        python manage.py migrate && 
+        python manage.py runserver 0.0.0.0:5000"
     volumes:
       - ./app/:/usr/src/app/
     ports:
