@@ -38,27 +38,17 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    command: gunicorn --bind 0.0.0.0:8000 app.wsgi:application
+    command: python manage.py runserver 0.0.0.0:5000
     volumes:
       - ./app/:/usr/src/app/
     ports:
-      - 8000:8000
+      - 5000:5000
     env_file:
       - ./.env
     networks:
       - app_network
     depends_on:
       - db
-      
-  nginx:
-    build:
-      context: ./nginx
-    ports:
-      - "1337:80"
-    depends_on:
-      - web
-    networks:
-      - app_network
 
 volumes:
   postgres_data:
