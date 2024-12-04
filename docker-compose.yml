@@ -1,6 +1,15 @@
 version: '3.8'
 
 services:
+  db:
+    image: postgres:14.15-alpine3.20
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=clcrud
+      - POSTGRES_PASSWORD=clcrud
+      - POSTGRES_DB=clcrud
+  
   web:
     build:
       context: .
@@ -14,16 +23,9 @@ services:
       - ./.env.dev
     networks:
       - app_network
-
-  # db:
-  #   image: postgres:14.15-alpine3.20
-  #   volumes:
-  #     - postgres_data:/var/lib/postgresql/data/
-  #   environment:
-  #     - POSTGRES_USER=clcrud
-  #     - POSTGRES_PASSWORD=clcrud
-  #     - POSTGRES_DB=clcrud
-
+    depends_on:
+      - db
+      
 volumes:
   postgres_data:
 
