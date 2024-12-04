@@ -43,13 +43,13 @@ services:
         sleep 10 && 
         python manage.py makemigrations && 
         python manage.py migrate && 
-         gunicorn app.wsgi:application --bind 0.0.0.0:5000"
+         gunicorn app.wsgi:application --bind 0.0.0.0:8000"
     volumes:
       - ./app/:/usr/src/app/
     expose:
-      - 5000
+      - 8000
     ports:
-      - 5000:5000
+      - 8000:8000
     env_file:
       - ./.env
     networks:
