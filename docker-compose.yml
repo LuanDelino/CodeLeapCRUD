@@ -9,6 +9,8 @@ services:
       - POSTGRES_USER=clcrud
       - POSTGRES_PASSWORD=clcrud
       - POSTGRES_DB=clcrud
+    ports:
+      - "5432:5432"
     healthcheck:
       test: ["CMD", "pg_isready", "-U", "clcrud"]
       interval: 10s
@@ -37,7 +39,7 @@ services:
       context: .
       dockerfile: Dockerfile
     command: >
-      bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+      bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:5000"
     volumes:
       - ./app/:/usr/src/app/
     ports:
